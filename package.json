@@ -5,15 +5,23 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start:local": "node src/index.js",
+    "start:remote": "node src/remote-server.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0"
+    "@modelcontextprotocol/sdk": "^1.12.1"
   },
-  "keywords": ["23andme", "raw", "rsid", "genotype", "mcp", "mcp-server"],
+  "keywords": [
+    "23andme",
+    "raw",
+    "rsid",
+    "genotype",
+    "mcp",
+    "mcp-server"
+  ],
   "author": "Evgeni Obukhovski",
   "license": "MIT"
 }
