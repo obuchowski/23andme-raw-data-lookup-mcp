@@ -1,8 +1,12 @@
 import http from 'http';
+import dotenv from 'dotenv';
 import { LIST_TOOLS, lookupGenotype } from './helpers/tools.js';
 
 const PORT = 3000;
 const PATH = '/mcp';
+
+dotenv.config();
+const AUTH_TOKEN = process.env.AUTH_TOKEN;
 
 const JSON_RPC_ERROR_PARSE = {
   code: -32700,
@@ -15,6 +19,18 @@ const JSON_RPC_ERROR_METHOD_NOT_FOUND = {
 }
 
 http.createServer(async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) {
+    res.writeHead(401, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ message: 'Missing or invalid Authorization header' }));
+  }
+
+  const token = authHeader.slice(7);
+  if (token !== AUTH_TOKEN) {
+    res.writeHead(403, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ message: 'Forbidden' }));
+  }
+
   const pathname = req.url.split('?')[0];
   const httpMethod =  req.method;
 
