@@ -8,8 +8,6 @@ if (!filePath) {
 }
 
 export function loadData() {
-  console.log(`{Loading data from "${filePath}"...}`);
-
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     if (!fileContent) {
@@ -32,7 +30,6 @@ export function loadData() {
         )
       });
 
-    console.log(`✅ Loaded ${genome.size} variants`);
     return genome;
   } catch (e) {
     console.error(`Could not read file "${filePath}"`, e.message);

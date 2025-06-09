@@ -64,7 +64,7 @@ http.createServer(async (req, res) => {
         result = LIST_TOOLS;
         break;
       case 'tools/call':
-        result = lookupGenotype(params?.arguments?.rsid || {});
+        result = await lookupGenotype(params?.arguments?.rsid || {});
         break;
       default:
         error = JSON_RPC_ERROR_METHOD_NOT_FOUND;

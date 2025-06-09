@@ -11,6 +11,4 @@ const mcp = new Server(
 mcp.setRequestHandler(ListToolsRequestSchema, async () => LIST_TOOLS);
 mcp.setRequestHandler(CallToolRequestSchema, async ({ params }) => lookupGenotype(params.arguments?.rsid));
 
-mcp.connect(new StdioServerTransport()).then(() => {
-  console.log('🚀 MCP server is running');
-});
+mcp.connect(new StdioServerTransport());
